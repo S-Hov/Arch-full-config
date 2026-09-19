@@ -48,10 +48,35 @@
     "starts_open": true
   },
   "git_panel": {
+    "button": true,
     "dock": "left",
     "default_width": 360,
-    "group_by": "status",
-    "status_style": "icon"
+    "status_style": "label_color",
+    "file_icons": true,
+    "folder_indicator": "both",
+    "sort_by": "path",
+    "group_by": "staging",
+    "tree_view": true,
+    "diff_stats": true,
+    "show_count_badge": true,
+    "collapse_untracked_diff": true,
+    "starts_open": false,
+    "commit_title_max_length": 72,
+    "entry_primary_click_action": "file_diff",
+    "scrollbar": {
+      "show": "auto"
+    }
+  },
+  "git": {
+    "git_gutter": "tracked_files",
+    "gutter_debounce": 100,
+    "hunk_style": "staged_hollow",
+    "inline_blame": {
+      "enabled": false
+    },
+    "branch_picker": {
+      "show_author_name": true
+    }
   },
   "outline_panel": {
     "dock": "left",
@@ -67,6 +92,12 @@
     "show": true,
     "show_nav_history_buttons": true,
     "show_tab_bar_buttons": true
+  },
+  "title_bar": {
+    "show_branch_name": true,
+    "show_branch_status_icon": true,
+    "show_worktree_name": true,
+    "show_project_items": true
   },
   "tabs": {
     "close_position": "right",
