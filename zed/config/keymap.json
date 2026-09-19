@@ -1,0 +1,29 @@
+[
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      // Preserve the custom Antigravity shortcut for selecting a whole line.
+      "ctrl-k": "editor::SelectLine",
+      // Match VS Code: duplicate the current line or selection above/below.
+      "alt-shift-up": "editor::DuplicateLineUp",
+      "alt-shift-down": "editor::DuplicateLineDown",
+      "alt-shift-t": [
+        "task::Spawn",
+        {
+          "task_name": "Перевести выделенный текст"
+        }
+      ]
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-alt-t": [
+        "task::Spawn",
+        {
+          "task_name": "Открыть Kitty в проекте"
+        }
+      ]
+    }
+  }
+]

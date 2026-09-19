@@ -10,6 +10,7 @@
 | --- | --- | --- |
 | [`niri/`](niri/README.md) | Композитор, мониторы, окна, горячие клавиши и интеграция Noctalia v5 | `~/.config/niri/` |
 | [`kitty/`](kitty/README.md) | Терминал, Nerd Font и цветовая тема Noctalia | `~/.config/kitty/` |
+| [`zed/`](zed/README.md) | Zed в стиле VS Code, веб-разработка, локальный ИИ, перевод и орфография | `~/.config/zed/` и `~/.config/codebook/` |
 | [`fish/`](fish/README.md) | Интерактивная оболочка, Tide, Fisher и команда `pac` | `~/.config/fish/` |
 | [`yazi/`](yazi/README.md) | Терминальный файловый менеджер и пользовательские клавиши | `~/.config/yazi/` |
 | [`cooling/`](cooling/README.md) | Безопасная WMI-кривая вентиляторов Lenovo Legion 83LV | `/usr/local/libexec/`, `/etc/`, systemd |
@@ -23,6 +24,7 @@
 - US + русская фонетическая раскладка, переключение через `Alt+Shift`;
 - двухмониторный шаблон: `DP-1` 2560×1440 и `DP-2` 3840×2160;
 - Kitty с Fish, Nerd Font, прозрачностью и темой Noctalia;
+- Zed с VS Code-клавишами, веб-инструментами, Ollama, Codebook и локальным hover-переводом;
 - Fish с Tide и удобной обёрткой `pac` над `paru`, `yay` или `pacman`;
 - Yazi с показом скрытых файлов и привычными клавишами копирования/вставки;
 - агрессивная кривая трёх вентиляторов Lenovo Legion 83LV через штатный `lenovo_wmi_other`, с автоматическим возвратом к BIOS при ошибке.
