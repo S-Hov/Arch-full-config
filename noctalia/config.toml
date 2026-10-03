@@ -143,15 +143,19 @@ type = "hov/hardware-power:power"
 [widget.igpu_sensors]
 type = "hov/hardware-power:igpu"
 
-# One dark Ayu base with a red accent across the shell and applications.
+# Sumi Red keeps every UI accent in one restrained red/graphite family.
 [theme]
-source = "community"
-community_palette = "Ayu Red"
+source = "custom"
+custom_palette = "SumiRed"
 mode = "dark"
+shell_mode = "dark"
+pure_black_dark = false
 
 [theme.templates]
 enable_builtin_templates = true
-builtin_ids = [ "gtk3", "gtk4", "btop", "helix" ]
+builtin_ids = [ "gtk3", "gtk4", "btop", "helix", "kitty", "qt", "kcolorscheme" ]
+enable_community_templates = true
+community_ids = [ "codex", "telegram", "pywalfox", "ungoogled-chromium", "vscode", "yazi" ]
 
 # ── Disk Widget ───────────────────────────────────────────────────────────────
 

@@ -25,7 +25,8 @@
 - Noctalia v5 запускается вместе с Niri и управляет launcher, lock screen и аудио-OSD;
 - US + русская фонетическая раскладка, переключение через `Alt+Shift`;
 - двухмониторный шаблон: `DP-1` 2560×1440 и `DP-2` 3840×2160;
-- единая тёмная Sumi Red палитра для Noctalia, GTK, Kitty, Tide и терминальных приложений;
+- единая тёмная Sumi Red палитра для Noctalia, GTK, Kitty, Tide, Qt, btop, Helix и терминальных приложений;
+- готовые темы той же палитры для Telegram, Micro, Yazi и Codex;
 - Kitty с Fish, Nerd Font, прозрачностью и темой Noctalia;
 - Zed с VS Code-клавишами, веб-инструментами, Ollama, Codebook и локальным hover-переводом;
 - Fish с Tide и удобной обёрткой `pac`, предпочитающей Shelly с fallback на `paru`, `yay` или `pacman`;
@@ -70,6 +71,16 @@ git clone <URL-этого-репозитория> ~/Projects/Arch-full-config
 cd ~/Projects/Arch-full-config
 ```
 
+Для полного восстановления можно использовать скрипты репозитория:
+
+```bash
+./install-packages.sh
+./restore.sh
+```
+
+`restore.sh` не удаляет старые настройки: перед копированием он складывает их в
+`~/.local/state/arch-full-config-backups/<дата-время>`.
+
 Сделайте резервную копию существующих настроек:
 
 ```bash
@@ -111,6 +122,21 @@ sudo ./cooling/install.sh
 
 Niri следит за конфигом и применяет корректные изменения без перезапуска сессии.
 
+## Shelly через `pac`
+
+```bash
+pac search firefox
+pac install firefox
+pac remove firefox
+pac purge firefox
+pac update
+pac help
+```
+
+Для всех возможностей Shelly используйте `shelly --help`; например,
+`shelly list-updates all`, `shelly backup --export` и
+`shelly purify standard --dry-run`.
+
 ## Быстрая проверка
 
 ```bash
@@ -131,6 +157,7 @@ sensors lenovo_wmi_other-virtual-0
 - Файлы в `fish/functions/`, `fish/completions/` и `fish/conf.d/` в основном установлены Fisher и Tide. Пользовательская логика находится в `fish/config.fish`.
 - Noctalia хранит собственные настройки отдельно; этот репозиторий настраивает её интеграцию с Niri, но не заменяет конфигурацию самой оболочки.
 - Раздел `cooling/` намеренно привязан к DMI `83LV`; на другой модели установщик завершится без записи в оборудование.
+- GRUB намеренно не устанавливается скриптами: текущая конфигурация `/etc/default/grub` не меняется.
 
 ## Полезные ссылки
 

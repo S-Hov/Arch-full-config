@@ -20,9 +20,16 @@ restore_config_dir() {
     cp -a "$source/." "$target/"
 }
 
-for name in niri fish kitty noctalia gtk-3.0 gtk-4.0 btop helix yazi; do
+for name in niri fish kitty noctalia gtk-3.0 gtk-4.0 btop helix yazi \
+    qt5ct qt6ct micro telegram-desktop; do
     restore_config_dir "$name"
 done
+
+mkdir -p "$data_home/color-schemes"
+cp -a "$repo_dir/color-schemes/." "$data_home/color-schemes/"
+
+mkdir -p "$HOME/.codex/themes"
+cp -a "$repo_dir/codex/themes/." "$HOME/.codex/themes/"
 
 mkdir -p "$HOME/Pictures/wallpapers"
 cp -a "$repo_dir/wallpapers/." "$HOME/Pictures/wallpapers/"
@@ -33,6 +40,9 @@ cp -a "$repo_dir/noctalia/plugins/hardware-power" "$data_home/noctalia/plugins/"
 if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
+    if gsettings list-keys org.gnome.desktop.interface | grep -qx 'accent-color'; then
+        gsettings set org.gnome.desktop.interface accent-color 'red'
+    fi
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
     gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface cursor-size 24
@@ -43,6 +53,8 @@ fi
 if command -v noctalia >/dev/null 2>&1; then
     noctalia msg plugins enable hov/hardware-power >/dev/null 2>&1 || true
     noctalia msg config-reload >/dev/null 2>&1 || true
+    noctalia msg color-scheme-set custom SumiRed >/dev/null 2>&1 || true
+    noctalia msg theme-mode-set dark >/dev/null 2>&1 || true
     noctalia msg templates-apply >/dev/null 2>&1 || true
 fi
 
