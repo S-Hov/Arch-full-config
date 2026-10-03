@@ -1,0 +1,18 @@
+id = "hov/hardware-power"
+name = "Hardware Power"
+version = "1.0.0"
+plugin_api = 24
+author = "hov"
+license = "MIT"
+dependencies = []
+tags = ["hardware", "monitoring", "power"]
+icon = "bolt"
+description = "Power draw plus integrated AMD GPU sensors for the Noctalia bar."
+
+[[widget]]
+id = "power"
+entry = "power.luau"
+
+[[widget]]
+id = "igpu"
+entry = "igpu.luau"

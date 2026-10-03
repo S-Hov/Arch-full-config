@@ -1,0 +1,9 @@
+adw-gtk-theme
+btop
+fastfetch
+fish
+kitty
+niri
+nwg-look
+papirus-icon-theme
+yazi

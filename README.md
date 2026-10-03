@@ -13,6 +13,8 @@
 | [`zed/`](zed/README.md) | Zed в стиле VS Code, веб-разработка, локальный ИИ, перевод и орфография | `~/.config/zed/` и `~/.config/codebook/` |
 | [`fish/`](fish/README.md) | Интерактивная оболочка, Tide, Fisher и команда `pac` | `~/.config/fish/` |
 | [`yazi/`](yazi/README.md) | Терминальный файловый менеджер и пользовательские клавиши | `~/.config/yazi/` |
+| [`noctalia/`](noctalia/) | Палитра Sumi Red и локальный плагин датчиков мощности | `~/.config/noctalia/` |
+| [`wallpapers/`](wallpapers/) | Минималистичные обои под красно-графитовую тему | `~/Pictures/wallpapers/` |
 | [`cooling/`](cooling/README.md) | Безопасная WMI-кривая вентиляторов Lenovo Legion 83LV | `/usr/local/libexec/`, `/etc/`, systemd |
 
 В каждом каталоге есть отдельная инструкция с описанием файлов, зависимостей и способов проверки.
@@ -23,9 +25,13 @@
 - Noctalia v5 запускается вместе с Niri и управляет launcher, lock screen и аудио-OSD;
 - US + русская фонетическая раскладка, переключение через `Alt+Shift`;
 - двухмониторный шаблон: `DP-1` 2560×1440 и `DP-2` 3840×2160;
+- единая тёмная Sumi Red палитра для Noctalia, GTK, Kitty, Tide и терминальных приложений;
 - Kitty с Fish, Nerd Font, прозрачностью и темой Noctalia;
 - Zed с VS Code-клавишами, веб-инструментами, Ollama, Codebook и локальным hover-переводом;
-- Fish с Tide и удобной обёрткой `pac` над `paru`, `yay` или `pacman`;
+- Fish с Tide и удобной обёрткой `pac`, предпочитающей Shelly с fallback на `paru`, `yay` или `pacman`;
+- центрирование одиночных окон, красная активная рамка, графитовая неактивная рамка и мягкие тени;
+- датчики мощности CPU/APU и NVIDIA, а также загрузки, температуры и частоты встроенной AMD Radeon;
+- `Mod+M` запускает cliamp, а нативный `Alt+Tab` Niri показывает живые превью окон;
 - Yazi с показом скрытых файлов и привычными клавишами копирования/вставки;
 - агрессивная кривая трёх вентиляторов Lenovo Legion 83LV через штатный `lenovo_wmi_other`, с автоматическим возвратом к BIOS при ошибке.
 

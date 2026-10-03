@@ -16,10 +16,50 @@ environment {
 }
 
 debug {
-    // Действия уведомлений Noctalia / Noctalia notification actions
     honor-xdg-activation-with-invalid-serial
+
+    render-drm-device "/dev/dri/by-path/pci-0000:01:00.0-render"
+    wait-for-frame-completion-before-queueing
 }
 
 hotkey-overlay {
     skip-at-startup
+}
+
+// Calm, dark workspace overview / Спокойный тёмный обзор рабочих столов
+overview {
+    zoom 0.46
+    backdrop-color "#08090b"
+
+    workspace-shadow {
+        softness 48
+        spread 8
+        offset x=0 y=12
+        color "#00000080"
+    }
+}
+
+// Native live-window Alt+Tab / Нативный Alt+Tab с живыми превью окон
+recent-windows {
+    debounce-ms 500
+    open-delay-ms 90
+
+    highlight {
+        active-color "#d9575738"
+        urgent-color "#ff707f70"
+        padding 20
+        corner-radius 18
+    }
+
+    previews {
+        max-height 460
+        max-scale 0.58
+    }
+
+    binds {
+        Alt+Tab { next-window scope="all"; }
+        Alt+Shift+Tab { previous-window scope="all"; }
+        Alt+grave { next-window scope="all" filter="app-id"; }
+        Alt+Shift+grave { previous-window scope="all" filter="app-id"; }
+    }
 }

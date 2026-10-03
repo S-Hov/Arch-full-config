@@ -1,9 +1,11 @@
+fish_add_path --global /home/hov/.local/bin
+
 if status is-interactive
     # Интерактивные настройки Fish
 end
 
 
-# Упрощённый интерфейс для pacman / paru / yay
+# Упрощённый интерфейс для Shelly / paru / yay / pacman
 #
 # Примеры:
 #   pac install firefox
@@ -18,12 +20,15 @@ end
 #   pac orphan
 #   pac help
 
-function pac --description "Упрощённый интерфейс для pacman, paru и yay"
+function pac --description "Единый интерфейс для Shelly, paru, yay и pacman"
     # Автоматически выбираем пакетный менеджер.
-    # Приоритет: paru -> yay -> pacman.
+    # Shelly использует libalpm и умеет работать с официальными пакетами и AUR.
+    # Для специфичных операций pacman (сироты, кэш, загрузка) остаётся fallback.
     set -l helper pacman
 
-    if command -q paru
+    if command -q shelly
+        set helper shelly
+    else if command -q paru
         set helper paru
     else if command -q yay
         set helper yay
@@ -45,7 +50,11 @@ function pac --description "Упрощённый интерфейс для pacma
                 return 1
             end
 
-            if test $helper = pacman
+            if test $helper = shelly
+                # Bare queries search both official repositories and the AUR,
+                # then let Shelly resolve and confirm the package to install.
+                command shelly $argv
+            else if test $helper = pacman
                 sudo command pacman -S --needed $argv
             else
                 command $helper -S --needed $argv
@@ -59,7 +68,9 @@ function pac --description "Упрощённый интерфейс для pacma
 
             # Удаляет пакет, но не удаляет автоматически
             # все его зависимости и конфигурацию.
-            if test $helper = pacman
+            if test $helper = shelly
+                command shelly remove standard $argv
+            else if test $helper = pacman
                 sudo command pacman -R $argv
             else
                 command $helper -R $argv
@@ -73,7 +84,9 @@ function pac --description "Упрощённый интерфейс для pacma
 
             # Удаляет пакет, неиспользуемые зависимости
             # и системные конфигурационные файлы.
-            if test $helper = pacman
+            if test $helper = shelly
+                command shelly remove standard --cascade --remove-config $argv
+            else if test $helper = pacman
                 sudo command pacman -Rns $argv
             else
                 command $helper -Rns $argv
@@ -85,7 +98,12 @@ function pac --description "Упрощённый интерфейс для pacma
                 return 1
             end
 
-            command $helper -Ss $argv
+            if test $helper = shelly
+                command shelly search standard $argv
+                command shelly search aur $argv
+            else
+                command $helper -Ss $argv
+            end
 
         case list ls installed
             # Без аргументов выводит все установленные пакеты.
@@ -102,7 +120,13 @@ function pac --description "Упрощённый интерфейс для pacma
                 return 1
             end
 
-            command $helper -Si $argv
+            if test $helper = shelly
+                # pacman handles repository metadata; fall back to AUR metadata.
+                command pacman -Si $argv
+                or command shelly search aur --detail $argv
+            else
+                command $helper -Si $argv
+            end
 
         case local-info installed-info
             if test (count $argv) -eq 0
@@ -115,7 +139,9 @@ function pac --description "Упрощённый интерфейс для pacma
         case update upgrade up
             # В Arch update и upgrade фактически являются
             # одной операцией полного обновления системы.
-            if test $helper = pacman
+            if test $helper = shelly
+                command shelly upgrade all
+            else if test $helper = pacman
                 sudo command pacman -Syu
             else
                 command $helper -Syu
@@ -124,7 +150,10 @@ function pac --description "Упрощённый интерфейс для pacma
         case refresh
             # Принудительно обновляет базы пакетов и систему.
             # Обычно достаточно обычного pac update.
-            if test $helper = pacman
+            if test $helper = shelly
+                command shelly sync standard
+                and command shelly upgrade all
+            else if test $helper = pacman
                 sudo command pacman -Syyu
             else
                 command $helper -Syyu
@@ -158,11 +187,7 @@ function pac --description "Упрощённый интерфейс для pacma
         case clean
             # Безопасная очистка старых пакетов.
             # Не используется -Scc, чтобы не удалять весь кэш.
-            if test $helper = pacman
-                sudo command pacman -Sc
-            else
-                command $helper -Sc
-            end
+            sudo command pacman -Sc
 
         case download
             if test (count $argv) -eq 0
@@ -170,7 +195,9 @@ function pac --description "Упрощённый интерфейс для pacma
                 return 1
             end
 
-            if test $helper = pacman
+            if test $helper = shelly
+                sudo command pacman -Sw $argv
+            else if test $helper = pacman
                 sudo command pacman -Sw $argv
             else
                 command $helper -Sw $argv
@@ -180,9 +207,10 @@ function pac --description "Упрощённый интерфейс для pacma
             __pac_help $helper
 
         case raw
-            # Позволяет передать оригинальные аргументы напрямую:
-            # pac raw -Syu
-            if test $helper = pacman
+            # Передаёт аргументы напрямую выбранному менеджеру.
+            if test $helper = shelly
+                command shelly $argv
+            else if test $helper = pacman
                 sudo command pacman $argv
             else
                 command $helper $argv
@@ -238,3 +266,19 @@ function nano
 end
 
 alias yz="yazi"
+
+alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+
+alias docker-start="sudo systemctl start docker.service"
+alias docker-stop="sudo systemctl stop docker.service"
+alias docker-status="systemctl status docker.service"
+
+alias agy="antigravity-ide"
+
+alias fun-status="systemctl status legion-fan-curve.service"
+alias fun-stop="sudo systemctl stop legion-fan-curve.service"
+alias fun-start="sudo systemctl start legion-fan-curve.service"
+alias fun-disable="sudo systemctl disable --now legion-fan-curve.service"
+alias fun-enable="sudo systemctl enable --now legion-fan-curve.service"
+
+alias zed="zeditor"

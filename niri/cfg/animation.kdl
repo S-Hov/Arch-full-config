@@ -33,4 +33,8 @@ animations {
     overview-open-close {
         spring damping-ratio=0.92 stiffness=750 epsilon=0.0001
     }
+    recent-windows-close {
+        duration-ms 130
+        curve "ease-out-cubic"
+    }
 }

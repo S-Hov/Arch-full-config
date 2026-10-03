@@ -6,6 +6,7 @@ binds {
     Mod+D hotkey-overlay-title="App launcher / Меню приложений" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+B hotkey-overlay-title="Browser / Браузер: Thorium" { spawn "thorium-browser-avx2" "--ozone-platform=wayland" "--enable-features=UseOzonePlatform,Vulkan,VulkanFromANGLE" "--ignore-gpu-blocklist" "--disable-features=UseChromeOSDirectVideoDecoder"; }
     Mod+E hotkey-overlay-title="Files / Файлы: Nautilus" { spawn "nautilus"; }
+    Mod+M hotkey-overlay-title="Music / Музыка: cliamp" { spawn "kitty" "--class" "cliamp" "--title" "cliamp" "cliamp"; }
     Mod+V hotkey-overlay-title="Clipboard / Буфер обмена" { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
     Mod+Alt+L hotkey-overlay-title="Lock / Блокировка" allow-inhibiting=false { spawn "noctalia" "msg" "session" "lock"; }
 
