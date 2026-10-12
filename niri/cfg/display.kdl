@@ -1,7 +1,7 @@
 // Имена и режимы: `niri msg outputs` / Names and modes: `niri msg outputs`
 
-// Внешний монитор 34" слева / External 34" monitor on the left (120Hz = perfect 2:1 ratio with 240Hz)
-output "DP-1" {
+// Внешний монитор 34" слева; идентификатор не зависит от номера DP-разъёма.
+output "Xiaomi Corporation Mi monitor 5323110166013" {
     mode "3440x1440@120.000"
     scale 1.5
     transform "normal"
@@ -17,7 +17,6 @@ output "eDP-1" {
     focus-at-startup
 }
 
-// Если новый монитор подключён по HDMI, замените DP-2 на HDMI-A-1.
-// If connected over HDMI, replace DP-2 with HDMI-A-1.
+// Для другого монитора используйте его manufacturer/model/serial из `niri msg outputs`.
 
 // Популярные альтернативы / Popular alternatives
