@@ -38,7 +38,8 @@ binds {
     Mod+C       { center-column; }
     Mod+Ctrl+C  { center-visible-columns; }
     Mod+F       { fullscreen-window; }
-    Mod+Ctrl+F  { expand-column-to-available-width; }
+    // Вся ширина монитора независимо от соседних колонок; повтор возвращает размер.
+    Mod+Ctrl+F repeat=false { maximize-column; }
     Mod+T       { toggle-window-floating; }
     Mod+W       { toggle-column-tabbed-display; }
     Mod+R       { switch-preset-column-width; }
